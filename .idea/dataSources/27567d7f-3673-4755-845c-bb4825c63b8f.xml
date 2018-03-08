@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="mysql@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="mysql">
+      <Current>1</Current>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="performance_schema"/>
+    <schema id="5" parent="1" name="quartz"/>
+    <schema id="6" parent="1" name="sponge_college"/>
+    <schema id="7" parent="1" name="test">
+      <Visible>1</Visible>
+    </schema>
+    <schema id="8" parent="1" name="youngcms"/>
+    <table id="9" parent="7" name="role"/>
+    <table id="10" parent="7" name="user"/>
+    <routine id="11" parent="7" name="init_shiro_demo">
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <column id="12" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>int(8)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="13" parent="9" name="user_id">
+      <Position>2</Position>
+      <DataType>int(8)|0</DataType>
+    </column>
+    <column id="14" parent="9" name="role_name">
+      <Position>3</Position>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <key id="15" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="16" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="17" parent="10" name="age">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="10" name="name">
+      <Position>3</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="10" name="password">
+      <Position>4</Position>
+      <Comment>密码</Comment>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <key id="20" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

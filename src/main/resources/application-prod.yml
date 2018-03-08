@@ -1,0 +1,78 @@
+###################  项目启动端口  ###################
+server:
+  port: 8080
+
+spring:
+  #模板渲染引擎配置
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+    check-template-location: true
+    content-type: text/html
+    #启用MVC Thymeleaf视图分辨率
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    #thymeleaf end
+    #spring.thymeleaf.template-resolver-order= # Order of the template resolver in the chain. spring.thymeleaf.view-names= # Comma-separated list of view names that can be resolved.
+
+  #Druid数据源配置
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/spring?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+      #通过connectionProperties属性来打开mergeSql功能；慢SQL记录
+      tomcat:
+        connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+  #AOP
+  aop:
+      auto: true #Add @EnableAspectJAutoProxy.
+      proxy-target-class: false #Whether subclass-based (CGLIB) proxies are to be created (true)
+
+  #热部署配置
+  devtools:
+      restart:
+        enabled: true
+
+  #持久层框架
+  jpa:
+      database: MySQL
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+        naming:
+          strategy: org.hibernate.cfg.ImprovedNamingStrategy
+
+
+  #redis服务配置
+  redis:
+       # redis数据库索引（默认为0），我们使用索引为3的数据库，避免和其他数据库冲突
+       database: 3
+       # redis服务器地址（默认为localhost）
+       host: localhost
+       # redis端口（默认为6379）
+       port: 6379
+       # redis访问密码（默认为空）
+       password: 123456
+       # redis连接超时时间（单位为毫秒）
+       timeout: 0
+       # redis连接池配置
+       pool:
+        # 最大可用连接数（默认为8，负数表示无限）
+        max-active: 256
+        # 最大空闲连接数（默认为8，负数表示无限）
+        max-idle: 256
+        # 最小空闲连接数（默认为0，该值只有为正数才有作用）
+        min-idle: 0
+        # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+        max-wait: -1
+
+#spring security开启Xss攻击防御
+security:
+  headers:
+    xss: true
+

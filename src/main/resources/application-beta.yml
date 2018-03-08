@@ -1,0 +1,153 @@
+###################  项目启动端口  ###################
+server:
+  port: 8080
+
+#Spring相关配置
+spring:
+  #session存入redis
+  session:
+    store-type: redis
+
+  #模板渲染引擎配置
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+    check-template-location: true
+    content-type: text/html
+    #启用MVC Thymeleaf视图分辨率
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    #thymeleaf end
+    #spring.thymeleaf.template-resolver-order= # Order of the template resolver in the chain. spring.thymeleaf.view-names= # Comma-separated list of view names that can be resolved.
+
+  #Druid数据源配置
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/spring?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: root
+      #最大活跃数
+      maxActive: 20
+      #初始化数量
+      initialSize: 1
+      #最大连接等待超时时间
+      maxWait: 60000
+      #打开PSCache，并且指定每个连接PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      #通过connectionProperties属性来打开mergeSql功能；慢SQL记录
+      #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 1 from dual
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      #配置监控统计拦截的filters，去掉后监控界面sql将无法统计,'wall'用于防火墙
+      filters: stat, wall, log4j
+
+  #AOP
+  aop:
+      auto: true #Add @EnableAspectJAutoProxy.
+      proxy-target-class: false #Whether subclass-based (CGLIB) proxies are to be created (true)
+
+  #热部署配置
+  devtools:
+      restart:
+        enabled: true
+
+  #持久层框架
+  jpa:
+      database: MySQL
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+        naming:
+          strategy: org.hibernate.cfg.ImprovedNamingStrategy
+
+  #redis服务配置
+  cache:
+    type: redis
+  redis:
+       # redis数据库索引（默认为0），我们使用索引为3的数据库，避免和其他数据库冲突
+       database: 0
+       # redis服务器地址（默认为localhost）高版本可能出现属性不识别改为hostName
+       host: localhost
+       # redis端口（默认为6379）
+       port: 6379
+       # redis访问密码（默认为空）
+       password: 123456
+       # redis连接超时时间（单位为毫秒）
+       timeout: 5000
+       # redis连接池配置
+       pool:
+        # 最大可用连接数（默认为8，负数表示无限）
+        max-active: 256
+        # 最大空闲连接数（默认为8，负数表示无限）
+        max-idle: 256
+        # 最小空闲连接数（默认为0，该值只有为正数才有作用）
+        min-idle: 0
+        # 从连接池中获取连接最大等待时间（默认为-1，单位为毫秒，负数表示无限）
+        max-wait: -1
+
+  #JMS
+  mail:
+    host: smtp.qq.com
+    username: 用户名
+    password: 密码
+    properties:
+           mail:
+            smtp:
+             auth: true
+             starttls:
+                 enable: true
+                 required: true
+  #订阅模式
+  jms:
+      pub-sub-domain: false
+
+  #ActiveMq
+  activemq:
+    broker-url: tcp://localhost:61616
+    in-memory: true
+    pool:
+      enabled: false #如果此处设置为true，需要加如下的依赖包，否则会自动配置失败，报JmsMessagingTemplate注入失败
+      expiry-timeout: 0
+      idle-timeout: 3000
+    user: admin
+    password: admin
+
+#spring security开启XSS攻击防御
+security:
+  headers:
+    xss: true
+
+#微信支付及微信公众号
+wechat:
+  pay:
+    appId: wxd236095d59523f3
+    mchId: 149447632
+    mchKey: 13014892173241480657349422084
+    subAppId:
+    subMchId:
+    keyPath:
+  mp:
+    appId: wxd2360d569523f3
+    secret: 15cb0b8e9a4d705de74697c8f2cb2c
+    token:
+    aesKey:
+
+#支付宝配置
+ali:
+    appId:
+    netWork: https://openapi.alipay.com/gateway.do
+    privateKey:
+    publicKey:
+    notifyUrl:
+
+
+

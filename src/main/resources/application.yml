@@ -1,0 +1,4 @@
+#激活环境分离配置文件
+spring:
+  profiles:
+    active: beta

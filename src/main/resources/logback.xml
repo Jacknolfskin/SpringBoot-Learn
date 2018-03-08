@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_HOME" value="./logs"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 系统日志 -->
+    <appender name="DebugLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件滚动方案 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>${LOG_HOME}/DebugLog/%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 保留除今天外前30天的数据 -->
+            <maxHistory>30</maxHistory>
+            <!-- 每个文件的大小,注：文件大小生效前提文件名称中包含 %i 自增长标识,当文件超出最大值时，会自动生成一个而文件,i+1 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 日志输出格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 获取线程日志 -->
+    <appender name="InfoLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件滚动方案 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>${LOG_HOME}/InfoLog/%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 保留除今天外前30天的数据 -->
+            <maxHistory>30</maxHistory>
+            <!-- 每个文件的大小,注：文件大小生效前提文件名称中包含 %i 自增长标识,当文件超出最大值时，会自动生成一个而文件,i+1 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 日志输出格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 处理线程日志 -->
+    <appender name="WarnLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件滚动方案 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>${LOG_HOME}/WarnLog/%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 保留除今天外前30天的数据 -->
+            <maxHistory>30</maxHistory>
+            <!-- 每个文件的大小,注：文件大小生效前提文件名称中包含 %i 自增长标识,当文件超出最大值时，会自动生成一个而文件,i+1 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 日志输出格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 处理线程日志 -->
+    <appender name="ErrorLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件滚动方案 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>${LOG_HOME}/ErrorLog/%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 保留除今天外前30天的数据 -->
+            <maxHistory>30</maxHistory>
+            <!-- 每个文件的大小,注：文件大小生效前提文件名称中包含 %i 自增长标识,当文件超出最大值时，会自动生成一个而文件,i+1 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 日志输出格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 根节点日志 -->
+    <appender name="RootLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 文件滚动方案 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 文件名称 -->
+            <fileNamePattern>${LOG_HOME}/RootLog/%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- 保留除今天外前30天的数据 -->
+            <maxHistory>10</maxHistory>
+            <!-- 每个文件的大小,注：文件大小生效前提文件名称中包含 %i 自增长标识,当文件超出最大值时，会自动生成一个而文件,i+1 -->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 日志输出格式 -->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} -%msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- loggers -->
+    <logger name="DebugLog">
+        <level value="debug"/>
+        <appender-ref ref="DebugLogAppender"/>
+    </logger>
+    <logger name="InfoLog">
+        <level value="info"/>
+        <appender-ref ref="InfoLogAppender"/>
+    </logger>
+    <logger name="WarnLog">
+        <level value="warn"/>
+        <appender-ref ref="WarnLogAppender"/>
+    </logger>
+    <logger name="ErrorLog">
+        <level value="error"/>
+        <appender-ref ref="ErrorLogAppender"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="RootLogAppender"/>
+    </root>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
