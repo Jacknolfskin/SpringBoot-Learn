@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>WebSocket广播式</title>
+    <meta name="content-type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body onload="disconnect()">
+<div>
+    <div>
+        <button id="connect" onclick="connect()">连接</button>
+        <button id="disconnect" onclick="disconnect()">断开连接</button>
+    </div>
+    <div id="conversionDiv">
+        <label>输入你的名字</label><input type="text" id="name"/>
+        <button id="sendname" onclick="sendname()">发送</button>
+        <p id="response"></p>
+    </div>
+</div>
+<script th:src="@{/js/sockjs.min.js}"></script>
+<script th:src="@{/js/stomp.min.js}"></script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript">
+    var stompClient = null;
+
+    function setConnected(connected){
+        document.getElementById("connect").disabled=connected;
+        document.getElementById("disconnect").disabled=!connected;
+        document.getElementById("conversionDiv").style.visibility=connected ? "visible" : "hidden";
+        $("#response").html();
+    }
+
+    function connect(){
+        var socket = new SockJS("/webSocketServer");
+        stompClient = Stomp.over(socket);
+        stompClient.connect({},function frame(){
+            setConnected(true);
+            stompClient.subscribe("/topic/getResponse", function(response){
+                showResponse(JSON.parse(response.body).responseMessage);
+                //showResponse(response.body);
+            });
+            stompClient.subscribe("/topic/hello", function(response){
+                showResponse(response.body);
+            });
+        });
+    }
+
+    function disconnect(){
+        if(stompClient != null){
+            stompClient.disconnect();
+        }
+        setConnected(false);
+    }
+
+    function sendname(){
+        var name = $("#name").val();
+        stompClient.send("/welcome", {}, JSON.stringify({'name':name}));
+    }
+
+    function showResponse(message){
+        var response = $("#response");
+        response.html(message);
+    }
+</script>
+</body>
+</html>

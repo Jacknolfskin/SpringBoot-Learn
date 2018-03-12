@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Web层日志切面
@@ -43,6 +44,9 @@ public class WebLogAspect {
 
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (Objects.isNull(attributes)){
+            return;
+        }
         HttpServletRequest request = attributes.getRequest();
 
         // 记录下请求内容

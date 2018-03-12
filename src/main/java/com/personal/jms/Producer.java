@@ -3,9 +3,8 @@ package com.personal.jms;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsMessagingTemplate;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+
 import javax.jms.Destination;
 import javax.jms.Queue;
 import javax.jms.Topic;
@@ -15,11 +14,13 @@ import javax.jms.Topic;
  * @Date: 2018/2/23 10:18
  * @Path: com.personal.jms
  */
-@Service("producer")
+//@Service("producer") //开启Active时打开注解，否则一直重试连接
 public class Producer {
 
+    /**
+     * 注入JmsTemplate，JmsMessagingTemplate对JmsTemplate进行了封装
+     */
     @Autowired
-    //注入JmsTemplate，JmsMessagingTemplate对JmsTemplate进行了封装
     private JmsMessagingTemplate jmsTemplate;
 
     @Autowired
@@ -37,7 +38,7 @@ public class Producer {
         jmsTemplate.convertAndSend(destination, message);
     }
 
-    //@Scheduled(fixedDelay=3000)
+    @Scheduled(fixedDelay=3000)
     public void send() {
         //send queue.
         this.jmsTemplate.convertAndSend(this.queue, "hi,activeMQ");
