@@ -5,7 +5,7 @@ SpringBoot-Learn基于SpringBoot,是个人学习SpringBoot集成示例，将它�
 
 #技术架构
 * 前端:Thymeleaf渲染引擎、Html、Ajax
-* 后台:SpringBoot、SpringData JPA、Spring Security、ActiveMQ、AliBaba-Driud、FastJson、Spring Session等
+* 后台:SpringBoot、SpringData JPA、Spring Security、Kaptcha、Swagger、WebSocket、ActiveMQ、AliBaba-Driud、FastJson、Spring Session等
 * 缓存:Redis
 * 数据库:Mysql
 
@@ -16,10 +16,11 @@ SpringBoot-Learn基于SpringBoot,是个人学习SpringBoot集成示例，将它�
 * 采用Spring Session实现用户Session持久化到Redis，方便Session分布式管理
 * 采用FastJson和thymeleaf实现页面渲染及跳转，返回Json数据用户前后分离
 * 实现跨域访问
-* 采用ActiveMQ实现消息队列
+* 采用ActiveMQ实现消息队列及异步任务处理
 * 采用Swagger2生成统一接口文档
 * 全局异常配置
 * 微信第三方登录及微信和支付宝支付功能
+* WebSocket连接实现
 * 更多功能自我发现
 
 ## 项目特点
@@ -34,6 +35,6 @@ SpringBoot-Learn基于SpringBoot,是个人学习SpringBoot集成示例，将它�
 10. 使用Swagger2统一生成接口文档
 11. 使用消息队列异步消息处理及任务调度
 12. 基于javabean方式的spring配置，抛弃了传统的易错,臃肿xml配置,采用javabean的方式配置spring,简化了项目的配置
-
+13. 全局异常配置及处理
 ## 技术讨论 & [博客地址](http://codeteen.cn/)
 如果对项目有任何疑问或者建议,欢迎到我的博客留言!
