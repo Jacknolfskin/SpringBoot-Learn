@@ -52,8 +52,13 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     *
+     * @param authentication
+     * @return
+     */
     @Override
-    public boolean supports(Class<?> aClass) {
-        return true;
+    public boolean supports(Class<?> authentication) {
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }

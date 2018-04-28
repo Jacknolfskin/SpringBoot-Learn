@@ -14,6 +14,7 @@ SpringBoot-Learn基于SpringBoot,是个人学习SpringBoot集成示例，将它�
 * 实现Rememeber Me及验证码功能
 * 实现同一用户异地登录只允许一人在线
 * 采用Spring Session实现用户Session持久化到Redis，方便Session分布式管理
+* 使用JWT实现接口安全设计
 * 采用FastJson和thymeleaf实现页面渲染及跳转，返回Json数据用户前后分离
 * 实现跨域访问
 * 采用ActiveMQ实现消息队列及异步任务处理

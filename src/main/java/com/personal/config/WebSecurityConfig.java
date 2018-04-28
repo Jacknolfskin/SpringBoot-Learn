@@ -1,12 +1,16 @@
 package com.personal.config;
 
+import com.personal.config.filter.JWTAuthenticationFilter;
+import com.personal.config.filter.JWTLoginFilter;
 import com.personal.config.filter.MyFilterSecurityInterceptor;
 import com.personal.config.handler.LoginSuccessHandler;
 import com.personal.config.provider.MyAuthenticationProvider;
 import com.personal.service.CustomUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,6 +35,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableWebSecurity
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -62,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PersistentTokenRepository persistentTokenRepository(){
+    public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
         // 设置数据源 默认使用的Apache的连接池
         jdbcTokenRepository.setDataSource(dataSource);
@@ -74,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(myAuthenticationProvider());
-        auth.userDetailsService(customUserService());
+        //auth.userDetailsService(customUserService());
     }
 
     @Override
@@ -89,48 +94,52 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .addFilterBefore(mySecurityFilter(), FilterSecurityInterceptor.class)
                 .headers()
-                   //disable X-Frame-Options
-                   .frameOptions().sameOrigin().disable()
+                //disable X-Frame-Options
+                .frameOptions().sameOrigin().disable()
                 //关闭crsf
                 //.csrf().disable()
                 .authorizeRequests()
-                    //均可访问
-                    .antMatchers("/statics/**").permitAll()
-                    //其余需要权限
-                    .anyRequest().authenticated()
-                .and().formLogin()
-                    // 配置登录页面的表单 action 必须是 '/login'
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login")
-                    //登录成功处理
-                    .successHandler(loginSuccessHandler())
-                    //用户名和密码的参数名必须是 'username' 和 'password'，
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    // 登录失败的 url 是 '/login-error'
-                    .failureUrl("/login?error")
-                    .permitAll()
+                //均可访问
+                //.antMatchers(HttpMethod.POST, "/users/signUp")
+                .antMatchers("/signUp","/statics/**").permitAll()
+                //其余需要权限
+                .anyRequest().authenticated()
+                .and()
+                .addFilter(new JWTLoginFilter(authenticationManager()))
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .formLogin()
+                // 配置登录页面的表单 action 必须是 '/login'
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                //登录成功处理
+                .successHandler(loginSuccessHandler())
+                //用户名和密码的参数名必须是 'username' 和 'password'，
+                .usernameParameter("username")
+                .passwordParameter("password")
+                // 登录失败的 url 是 '/login-error'
+                .failureUrl("/login?error")
+                .permitAll()
                 .and().logout()
-                     //清除session
-                    .invalidateHttpSession(true)
-                     //清除Cookie
-                    .deleteCookies("rememberMe")
-                    .permitAll()
+                //清除session
+                .invalidateHttpSession(true)
+                //清除Cookie
+                .deleteCookies("rememberMe")
+                .permitAll()
                 .and().rememberMe()
-                    .tokenRepository(persistentTokenRepository())
-                    .rememberMeServices(new PersistentTokenBasedRememberMeServices("rememberMe",customUserService(),persistentTokenRepository()))
-                    .tokenValiditySeconds(7*24*60*60)
+                .tokenRepository(persistentTokenRepository())
+                .rememberMeServices(new PersistentTokenBasedRememberMeServices("rememberMe", customUserService(), persistentTokenRepository()))
+                .tokenValiditySeconds(7 * 24 * 60 * 60)
                 //权限不足处理
                 .and().exceptionHandling()
-                    .accessDeniedHandler(new AccessDeniedHandlerImpl())
-                    .accessDeniedPage("/deny")
+                .accessDeniedHandler(new AccessDeniedHandlerImpl())
+                .accessDeniedPage("/deny")
                 //session管理,session失效后跳转
                 .and().sessionManagement()
-                    .invalidSessionUrl("/login")
-                    //只允许一个用户登录,如果同一个账户两次登录,那么第一个账户将被踢下线,跳转到登录页面
-                    //需重写user类equals和hashcode方法用户比较
-                    .maximumSessions(1)
-                    .sessionRegistry(sessionRegistry())
-                    .expiredUrl("/login");
+                .invalidSessionUrl("/login")
+                //只允许一个用户登录,如果同一个账户两次登录,那么第一个账户将被踢下线,跳转到登录页面
+                //需重写user类equals和hashcode方法用户比较
+                .maximumSessions(1)
+                .sessionRegistry(sessionRegistry())
+                .expiredUrl("/login");
     }
 }
