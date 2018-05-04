@@ -35,7 +35,7 @@ SpringBoot-Learn基于SpringBoot,是个人学习SpringBoot集成示例，将它�
 9. 控制器层统一的异常拦截机制,利用@ControllerAdvice统一对异常拦截,具体见com.personal.exception.GlobalExceptionHandler类。
 10. 使用Swagger2统一生成接口文档
 11. 使用消息队列异步消息处理及任务调度
-12. 基于javabean方式的spring配置，抛弃了传统的易错,臃肿xml配置,采用javabean的方式配置spring,简化了项目的配置
+12. 基于javabean方式的spring配置,抛弃了传统的易错,臃肿xml配置,采用javabean的方式配置spring,简化了项目的配置
 13. 全局异常配置及处理
-## 技术讨论 & [博客地址](http://www.codeteen.cn/)
+## 技术讨论 & [博客地址](https://www.codeteen.cn/)
 如果对项目有任何疑问或者建议,欢迎到我的博客留言!
