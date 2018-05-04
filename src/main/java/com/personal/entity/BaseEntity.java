@@ -3,13 +3,7 @@ package com.personal.entity;
 import java.io.Serializable;
 
 /**
- * ========================
- * Created with IntelliJ IDEA.
- * User：恒宇少年
  * Date：2017/4/15
- * Time：10:00
- * 码云：http://git.oschina.net/jnyqy
- * ========================
  */
 public class BaseEntity implements Serializable{
     /**
