@@ -33,7 +33,7 @@ SpringBoot-Learn基于SpringBoot,是个人学习SpringBoot集成示例，将它�
 6. 防止XSS攻击,通过XssFilter类对所有的输入的非法字符串进行过滤以及替换。
 8. 简单可用的代码生成体系，生成带有主页跳转和增删改查的通用控制器、html页面以及相关的js，还可以生成Service和Dao
 9. 控制器层统一的异常拦截机制,利用@ControllerAdvice统一对异常拦截,具体见com.personal.exception.GlobalExceptionHandler类。
-10. 使用Swagger2统一生成接口文档
+10. 使用Swagger2统一生成接口文档,方便查看
 11. 使用消息队列异步消息处理及任务调度
 12. 基于javabean方式的spring配置,抛弃了传统的易错,臃肿xml配置,采用javabean的方式配置spring,简化了项目的配置
 13. 全局异常配置及处理
