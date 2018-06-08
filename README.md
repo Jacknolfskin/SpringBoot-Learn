@@ -37,5 +37,5 @@ SpringBoot-Learn基于SpringBoot,是个人学习SpringBoot集成示例，将它�
 11. 使用消息队列异步消息处理及任务调度
 12. 基于javabean方式的spring配置,抛弃了传统的易错,臃肿xml配置,采用javabean的方式配置spring,简化了项目的配置
 13. 全局异常配置及处理
-## 技术讨论 & [博客地址](https://www.codeteen.cn/)
+## 技术讨论 & [博客地址](https://www.jacknolfskin.top/)
 如果对项目有任何疑问或者建议,欢迎到我的博客留言!
