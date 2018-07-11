@@ -1,27 +1,28 @@
 # SpringBoot-Learn
 
 ## 介绍
-SpringBoot-Learn基于SpringBoot,是个人学习SpringBoot集成示例，将它分享出来目的在于帮助自己和他人更好更快的学习SpringBoot这款优秀的微服务框架,也可以直接作为一个系统的脚手架项目! 
+SpringBoot-Learn基于一款SpringBoot的功能集成项目，将它分享出来目的在于帮助自己和他人更好更快的学习SpringBoot这款优秀的微服务框架,也可以直接作为一个系统的脚手架项目! 
 
 #技术架构
 * 前端:Thymeleaf渲染引擎、Html、Ajax
-* 后台:SpringBoot、SpringData JPA、Spring Security、Kaptcha、Swagger、WebSocket、ActiveMQ、AliBaba-Driud、FastJson、Spring Session等
+* 后台:SpringBoot、SpringData JPA、Spring Security、Kaptcha、Swagger、WebSocket、ActiveMQ、Kafka、AliBaba-Driud、FastJson、Spring Session等
 * 缓存:Redis
-* 数据库:Mysql
+* 数据库:MySQL
 
 ## 实现功能
-* 登录集成SpringSecurity,根据不同角色展示不同功能权限
-* 实现Rememeber Me及验证码功能
+* 集成SpringSecurity实现用户权限控制,根据不同角色使用不同功能
+* 实现Rememeber Me及动态验证码功能
 * 实现同一用户异地登录只允许一人在线
 * 采用Spring Session实现用户Session持久化到Redis，方便Session分布式管理
 * 使用JWT实现接口安全设计
-* 采用FastJson和thymeleaf实现页面渲染及跳转，返回Json数据用户前后分离
-* 实现跨域访问
+* 采用FastJson和thymeleaf实现页面渲染及跳转，实现前后端解耦
+* 跨域访问及传输
 * 采用ActiveMQ实现消息队列及异步任务处理
 * 采用Swagger2生成统一接口文档
-* 全局异常配置
+* 使用AOP实现全局异常处理
 * 微信第三方登录及微信和支付宝支付功能
-* WebSocket连接实现
+* SpringBoot-WebSocket连接实现消费发送
+* Kafka应用
 * 更多功能自我发现
 
 ## 项目特点
